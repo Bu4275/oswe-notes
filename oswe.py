@@ -149,7 +149,7 @@ def start_web_server(host='0.0.0.0', port=80, directory=os.getcwd(), use_https=F
     # print(f"[+] 已啟動 Web 伺服器執行緒於 {host}:{port}，服務目錄: {directory}")
 
 # Netcat
-def run_netcat(port=443, auto_command="whoami\n"):
+def run_netcat(port=443, auto_commands=["whoami", 'id']):
     # 使用 pty 創建主從終端機對
     master_fd, slave_fd = pty.openpty()
     
@@ -178,8 +178,11 @@ def run_netcat(port=443, auto_command="whoami\n"):
                 
                 if not first_input_detected and 'connect' in line:
                     first_input_detected = True
-                    print(f'[+] Sending command: {auto_command}')
-                    os.write(master_fd, auto_command.encode('utf-8'))  # 自動發送一條指令
+                    for command in auto_commands:
+                        if not command.endswith('\n'):
+                            command = command + '\n'
+                        print(f'[+] Sending command: {command}')
+                        os.write(master_fd, command.encode('utf-8'))  # 自動發送一條指令
                     
             except OSError:
                 break
